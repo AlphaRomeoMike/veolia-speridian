@@ -10,7 +10,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   constructor(
-    private _router: Router
+    private router: Router
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('admin'),
@@ -23,6 +23,6 @@ export class LoginComponent implements OnInit {
 
   submit() {
     console.log(this.loginForm.value);
-    this._router.navigate(['/dashboard']);
+    this.router.navigate(['/dashboard']);
   }
 }

@@ -5,7 +5,35 @@
     </button>
 </div>
 <div class="modal-body">
-    <input [(ngModel)]="user.name" type="text">
-    <input [(ngModel)]="user.age" type="number">
+    <form [formGroup]="form">
+        <div class="card">
+            <div class="card-header">
+                Please add data
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="style">Style</label>
+                    <input type="text" formControlName="style" class="form-control">
+                </div>
+                <!-- 2nd input -->
+                <div class="form-group">
+                    <label for="size">Size</label>
+                    <input type="text" formControlName="size" class="form-control">
+                </div>
+
+                <!-- 3rd input -->
+                <div class="form-group">
+                    <label for="duty">Duty</label>
+                    <input type="text" formControlName="duty" class="form-control">
+                </div>
+
+                <!-- 4th input -->
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" formControlName="quantity" class="form-control">
+                </div>
+            </div>
+        </div>
+    </form>
     <button (click)="passBack()" type="submit" class="btn btn-primary w-100">Pass back</button>
 </div>

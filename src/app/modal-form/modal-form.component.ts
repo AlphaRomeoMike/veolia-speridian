@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -7,19 +8,26 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./modal-form.component.scss']
 })
 export class ModalFormComponent implements OnInit {
-  @Input() public user: any;
-  @Output() passEntry: EventEmitter<any> = new EventEmitter();
+  form: FormGroup;
+  data: any;
+  // @Output() passEntry: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public activeModal: NgbActiveModal
-  ) { }
+  ) {
+    this.form = new FormGroup({
+      style: new FormControl(''),
+      size: new FormControl(''),
+      duty: new FormControl(''),
+      quantity: new FormControl(''),
+    })
+  }
 
   ngOnInit() {
-    console.log(this.user);
   }
 
   passBack() {
-    this.passEntry.emit(this.user);
-    this.activeModal.close(this.user);
+    // this.passEntry.emit(this.data);
+    this.activeModal.close(this.form.value);
   }
 }

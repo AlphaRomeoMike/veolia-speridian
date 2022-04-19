@@ -8,26 +8,28 @@
         [formGroupName]="empIndex"
         style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;"
       >
-        {{empIndex}} First Name :
-        <input type="text" formControlName="firstName" />
-        Last Name:
-        <input type="text" formControlName="lastName" />
+        {{empIndex}} Style:
+        <input type="text" formControlName="style" />
+        Size:
+        <input type="text" formControlName="size" />
+        Duty:
+        <input type="text" formControlName="duty" />
+        Quantity:
+        <input type="text" formControlName="quantity" />
 
-        <button (click)="removeEmployee(empIndex)">Remove</button>
+        <!-- <button (click)="removeEmployee(empIndex)">Remove</button> -->
 
         <div formArrayName="skills">
           <div
             *ngFor="let skill of employeeSkills(empIndex).controls; let skillIndex=index"
           >
             <div [formGroupName]="skillIndex">
-              {{skillIndex}} Skill :
-              <input type="text" formControlName="skill" />
-              Exp:
-              <input type="text" formControlName="exp" />
+              {{skillIndex}} Column :
+              <input type="text" formControlName="column" />
 
-              <button (click)="removeEmployeeSkill(empIndex,skillIndex)">
+              <!-- <button (click)="removeEmployeeSkill(empIndex,skillIndex)">
                 Remove
-              </button>
+              </button> -->
             </div>
           </div>
         </div>
@@ -36,7 +38,7 @@
         </button>
       </div>
     </div>
-    <button type="button" (click)="addEmployee()">Add Employee</button>
+    <button type="button" (click)="onUpdate()">Update</button>
   </div>
 </form>
 

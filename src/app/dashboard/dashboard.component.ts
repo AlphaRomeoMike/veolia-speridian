@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalFormComponent } from '../modal-form/modal-form.component';
 import { FormArray, FormBuilder, FormControl, FormGroup, } from '@angular/forms';
@@ -8,29 +8,43 @@ import { FormArray, FormBuilder, FormControl, FormGroup, } from '@angular/forms'
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
   empForm!: FormGroup;
+  providedData: any;
 
-  constructor(public modalService: NgbModal, private fb: FormBuilder) { }
+  constructor(public modalService: NgbModal, private fb: FormBuilder, private cdref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.empForm = this.fb.group({
       employees: this.fb.array([])
     });
+    
+   }
+
+   ngAfterViewInit(): void {
+    this.providedData = JSON.parse(localStorage.getItem('data')!);
+    console.log(this.providedData);
+
+    if (this.providedData) {
+      this.addEmployee();
+    }
    }
 
   openModal() {
     const modalRef = this.modalService.open(ModalFormComponent);
-    modalRef.result.then((result) => {
+    modalRef.result.then((result: any) => {
       if (result) {
         if (!localStorage.getItem('data')) {
-          const dataArray = new Array<any>();
-          dataArray.push(result);
+          const dataArray = {employees: []};
+          
+          dataArray.employees.push(result);
           localStorage.setItem('data', JSON.stringify(dataArray));
+          this.addEmployee();
         } else {
           const dataHolder = JSON.parse(localStorage.getItem('data')!);
-          dataHolder.push(result);
+          dataHolder.employees.push(result);
           localStorage.setItem('data', JSON.stringify(dataHolder));
+          this.addEmployee()
         }
       }
     });
@@ -40,16 +54,24 @@ export class DashboardComponent implements OnInit {
     return this.empForm.get('employees') as FormArray;
   }
 
-  newEmployee(): FormGroup {
+  newEmployee(data: any): FormGroup {
     return this.fb.group({
-      firstName: '',
-      lastName: '',
+      style: new FormControl(data.style),
+      size: new FormControl(data.size),
+      quantity: new FormControl(data.quantity),
+      duty: new FormControl(data.duty),
       skills: this.fb.array([])
     });
+
   }
 
   addEmployee() {
-    this.employees().push(this.newEmployee());
+    this.providedData.employees.forEach((element : any, idx: number) => {
+      this.employees().push(this.newEmployee(element));
+      this.cdref.detectChanges();
+      this.addEmployeeSkill(idx);
+
+    })
   }
 
   removeEmployee(empIndex: number) {
@@ -62,15 +84,21 @@ export class DashboardComponent implements OnInit {
       .get('skills') as FormArray;
   }
 
-  newSkill(): FormGroup {
+  newSkill(data: any): FormGroup {
     return this.fb.group({
-      skill: '',
-      exp: ''
+      column: data.column
     });
   }
 
   addEmployeeSkill(empIndex: number) {
-    this.employeeSkills(empIndex).push(this.newSkill());
+    // if (!this.providedData.employees[empIndex].skills) {
+    //   return;
+    // }
+    
+    this.providedData.employees[empIndex]?.skills.forEach((element: any, idx: number) => {
+      this.employeeSkills(empIndex).push(this.newSkill(element));
+    })
+    this.cdref.detectChanges();
   }
 
   removeEmployeeSkill(empIndex: number, skillIndex: number) {
@@ -79,5 +107,9 @@ export class DashboardComponent implements OnInit {
 
   onSubmit() {
     console.log(this.empForm.value);
+  }
+
+  onUpdate() {
+    localStorage.setItem('data', JSON.stringify(this.empForm.value));
   }
 }

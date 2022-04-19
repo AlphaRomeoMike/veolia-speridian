@@ -13,19 +13,16 @@ export class LoginComponent implements OnInit {
     private _router: Router
   ) {
     this.loginForm = new FormGroup({
-      email: new FormControl(''),
-      password: new FormControl('')
+      email: new FormControl('admin'),
+      password: new FormControl('admin')
     });
   }
 
   ngOnInit(): void {
   }
 
-  login() {
+  submit() {
     console.log(this.loginForm.value);
-    if (this.loginForm.value.email === 'admin@email.com' && this.loginForm.value.password === 'admin') {
-      this._router.navigate(['/dashboard']);
-    }
+    this._router.navigate(['/dashboard']);
   }
-
 }

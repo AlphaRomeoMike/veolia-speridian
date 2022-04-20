@@ -19,7 +19,6 @@ export class DataListingComponent implements OnInit {
 
 
   passBack() {
-    // this.passEntry.emit(this.data);
     this.activeModal.close();
   }
 

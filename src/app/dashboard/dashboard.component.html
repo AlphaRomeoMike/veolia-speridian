@@ -1,151 +1,49 @@
-<div class="row mt-4">
-  <div class="col-md-2">
-    <button (click)="openModal()" class="btn btn-primary">Add data</button>
-  </div>
-  <div class="col-md-2">
-    <button class="btn btn-primary" (click)="calcAll()">Caculate All Results</button>
-  </div>
-  <div class="col-md-2">
+<div class=" mt-4  text-end mb-3">
 
-    <button class="btn btn-primary" (click)="calcSingle()">Caculate Single</button>
-  </div>
+    <button (click)="openModal()" class="btn btn-primary float-right">Add data</button>
+    &nbsp;
+    <button *ngIf="gridData.length" (click)="processModel()" class="btn btn-primary float-right">Process Model </button>
 
 </div>
 
 
-<!-- <form [formGroup]="empForm" (ngSubmit)="onSubmit()">
-    <div formArrayName="employees">
-        <div *ngFor="let employee of employees().controls; let empIndex=index; trackBy:identify">
-            <div [formGroupName]="empIndex" style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;">
-                {{empIndex}} Style:
-                <input type="text" formControlName="style" />
-                Size:
-                <input type="text" formControlName="size" />
-                Duty:
-                <input type="text" formControlName="duty" />
-                Quantity:
-                <input type="text" formControlName="quantity" />
+<div class="row">
 
-                <button (click)="removeEmployee(empIndex)">Remove</button>
+    <table class="table table-striped" id="ExampleMaterialTable" *ngIf="gridData.length">
+        <thead>
+            <tr>
 
-                <div formArrayName="skills">
-                    <div *ngFor="let skill of employeeSkills(empIndex).controls; let skillIndex=index">
-                        <div [formGroupName]="skillIndex">
-                            {{skillIndex}} Column :
-                            <input type="text" formControlName="column" />
+                <th>#</th>
+                <ng-container *ngFor="let tableHeader of tableHeaders; let i= index;">
+                    <th scope="col" *ngIf="!tableHeader.hidden">{{ tableHeader.text }}</th>
+                </ng-container>
 
-                            <button (click)="removeEmployeeSkill(empIndex,skillIndex)">
-                Remove
-              </button>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let objGrid of gridData;index as i" #trRef>
+                <td>
+                    <div ngbDropdown class="d-inline-block" display="static">
+                        <button type="button" class="btn btn-outline-primary" id="dropdownBasic1"
+                            ngbDropdownToggle>Actions</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <button ngbDropdownItem (click)="view(i)">View</button>
+                            <button ngbDropdownItem (click)="edit(i)">Edit</button>
+                            <button ngbDropdownItem (click)="delete(i)">Delete</button>
                         </div>
                     </div>
-                </div>
-                <button type="button" (click)="addEmployeeSkill(empIndex)">
-                    Add Skill
-                </button>
-            </div>
-        </div>
-        <button type="button" (click)="onUpdate()">Update</button>
-    </div>
-</form> -->
+                    <!-- <input type="checkbox" class="uncheck" (click)="onChecked($event, i)" id="{{i}}" /> -->
+                </td>
 
+                <td *ngIf="objGrid?.unit">{{objGrid?.unit}}</td>
+                <td *ngIf="objGrid?.style">{{objGrid?.style}}</td>
+                <td *ngIf="objGrid?.size">{{objGrid?.size}}</td>
+                <td *ngIf="objGrid?.duty">{{objGrid?.duty}}</td>
+                <td *ngIf="objGrid?.quality">{{objGrid?.quality}}</td>
+                <td *ngIf="objGrid?.quantity">{{objGrid?.quantity}}</td>
+                <td *ngIf="objGrid?.load">{{objGrid?.load}}</td>
+            </tr>
+        </tbody>
+    </table>
 
-
-<!-- <ng-container *ngIf="employees().controls.length">
-
-    <form [formGroup]="empForm" (ngSubmit)="onSubmit()">
-        <div class="float-end">
-            <button type="button" (click)="onUpdate()">Update</button>
-        </div>
-        <div formArrayName="employees" class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Style</th>
-                        <th scope="col">Size</th>
-                        <th scope="col">Duty</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let employee of employees().controls; let empIndex=index; trackBy:identify">
-    
-                        <ng-container [formGroupName]="empIndex">
-                            <th scope="row">{{ empIndex + 1 }}</th>
-                            <td>
-                                {{empIndex}} Style:
-                                <input type="text" formControlName="style" />
-                            </td>
-    
-                            <td>
-                                Size:
-                                <input type="text" formControlName="size" />
-                            </td>
-                            <td>
-                                Duty:
-                                <input type="text" formControlName="duty" />
-                            </td>
-                            <td>
-                                Quantity:
-                                <input type="text" formControlName="quantity" />
-                            </td>
-    
-                            <ng-container formArrayName="skills">
-                                <td *ngFor="let skill of employeeSkills(empIndex).controls; let skillIndex=index">
-                                    <ng-container [formGroupName]="skillIndex">
-                                        {{skillIndex}} Column :
-                                        <input type="text" formControlName="column" />
-    
-                                        <button (click)="removeEmployeeSkill(empIndex,skillIndex)">
-                                        Remove
-                                        </button>
-                                    </ng-container>
-                                </td>
-                            </ng-container>
-    
-                            <td>
-                                <button type="button" (click)="addEmployeeSkill(empIndex)">
-                                    Add Skill
-                                </button>
-                            </td>
-    
-                        </ng-container>
-    
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </form>
-</ng-container> -->
-
-
-
-<div class="table-responsive">
-  <table class="table table-striped" id="ExampleMaterialTable" *ngIf="gridData.length">
-    <thead>
-      <tr>
-
-        <th>#</th>
-        <ng-container *ngFor="let tableHeader of tableHeaders; let i= index;">
-          <th scope="col" *ngIf="!tableHeader.hidden">{{ tableHeader.text }}</th>
-        </ng-container>
-
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let objGrid of gridData;index as i" #trRef>
-        <td>
-          <input type="checkbox" class="uncheck" (click)="onChecked($event, i)" id="{{i}}" />
-        </td>
-        <td *ngFor="let objTd of objGrid;">{{objTd}}</td>
-        <!-- <td *ngFor="let objData of gridData[i]; ">{{ objData.text }}</td> -->
-      </tr>
-    </tbody>
-  </table>
 </div>
-
-<button *ngIf="gridData.length" class="btn btn-primary" (click)="export()">Export as Excel</button>
-
-<!-- {{this.empForm.value | json}} -->

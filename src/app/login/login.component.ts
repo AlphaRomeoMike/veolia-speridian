@@ -13,8 +13,8 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {
     this.loginForm = new FormGroup({
-      email: new FormControl('admin'),
-      password: new FormControl('admin')
+      email: new FormControl(''),
+      password: new FormControl('')
     });
   }
 
@@ -22,7 +22,12 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.loginForm.value);
-    this.router.navigate(['/dashboard']);
+    if (this.loginForm.controls['email'].value === 'admin' && this.loginForm.controls['password'].value === 'admin') {
+      this.router.navigate(['/admin/landing']);
+    }
+    else {
+      this.router.navigate(['/landing']);
+    }
+
   }
 }

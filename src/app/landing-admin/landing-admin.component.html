@@ -1,0 +1,25 @@
+<div class="mt-5 pt-5">
+    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+        <li [ngbNavItem]="1">
+            <a ngbNavLink>Summary</a>
+            <ng-template ngbNavContent>
+                <div class="mt-5">
+                    <app-dashboard></app-dashboard>
+
+                </div>
+            </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+            <a ngbNavLink>Master</a>
+            <ng-template ngbNavContent>
+                <div class="mt-5">
+                    <!-- <app-dashboard></app-dashboard> -->
+
+                </div>
+            </ng-template>
+        </li>
+    </ul>
+
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+</div>

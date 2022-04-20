@@ -4,6 +4,7 @@ import { ModalFormComponent } from '../modal-form/modal-form.component';
 import { FormArray, FormBuilder, FormControl, FormGroup, } from '@angular/forms';
 import { TableUtil } from '../tableUtil';
 import { DataListingComponent } from '../data-listing/data-listing.component';
+import { ProcessModalComponent } from '../process-modal/process-modal.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,45 +17,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   providedData: any;
   tableHeaders: any[];
   gridData: any = [];
-  sampleData = [
-    [
-      'AERDIF - Aeration, coarse bubble diffused',
-      'outdoor, submerged, aggressive',
-      '2500ft',
-      'Draft',
-      '',
-      5057,
-      75,
-      75,
-      75,
-      605,
-      75,
-      75,
-      75,
-      605,
-      75,
-    ],
-    [
-      'BFPALL - Backflow preventer, 2 inch and less',
-      'Potable water, outdoor, warm climate',
-      'Unit',
-      'Draft',
-      '',
-      255,
-      1605,
-      105,
-      105,
-      105,
-      255,
-      105,
-      105,
-      105,
-      255,
-    ]
-  ];
   checkIds = [];
 
-  constructor(public modalService: NgbModal, private fb: FormBuilder, private cdref: ChangeDetectorRef) { }
+
+  constructor(public modalService: NgbModal, private fb: FormBuilder, private cdref: ChangeDetectorRef,
+    ) { }
 
   ngOnInit(): void {
     this.tableHeaders = [
@@ -63,13 +30,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         hidden: false
       },
       {
-        text: 'Asset Type',
-        hidden: false
-      },
-      {
         text: 'Style',
         hidden: false
       },
+
       {
         text: 'Size',
         hidden: false
@@ -89,70 +53,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       {
         text: 'Load %',
         hidden: false
-      },
-      {
-        text: 'Life %',
-        hidden: false
-      },
-      {
-        text: 'Unit Template Descripton',
-        hidden: true
-      },
-      {
-        text: 'Unit Template Application',
-        hidden: true
-      },
-      {
-        text: 'Units',
-        hidden: true
-      },
-      {
-        text: 'Rev.',
-        hidden: true
-      },
-      {
-        text: 'LAvg. Year',
-        hidden: true
-      },
-      {
-        text: 'Year 1',
-        hidden: true
-      },
-      {
-        text: 'Year 2',
-        hidden: true
-      },
-      {
-        text: 'Year 3',
-        hidden: true
-      },
-      {
-        text: 'Year 4',
-        hidden: true
-      },
-      {
-        text: 'Year 5',
-        hidden: true
-      },
-      {
-        text: 'Year 6',
-        hidden: true
-      },
-      {
-        text: 'Year 7',
-        hidden: true
-      },
-      {
-        text: 'Year 8',
-        hidden: true
-      },
-      {
-        text: 'Year 9',
-        hidden: true
-      },
-      {
-        text: 'Year 10',
-        hidden: true
       }
     ]
     this.empForm = this.fb.group({
@@ -163,118 +63,62 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.providedData = JSON.parse(localStorage.getItem('data')!);
-    console.log(this.providedData);
 
 
     if (this.providedData) {
 
       this.tableInt();
-      // this.addEmployee();
+
     }
   }
 
   tableInt() {
     this.gridData = JSON.parse(localStorage.getItem('data')!);
-
-
-    // this.providedData.forEach(item => {
-    //   // let holdData = [];
-    //   Object.keys(item).forEach(key => {
-    //     // holdData.push(item[key]);
-    //     this.gridData.push({ text: item[key] });
-    //   });
-
-    //   // holdData.map(x => this.gridData.push({ text: x }))
-    //   // this.gridData.push(holdData.flat());
-    // });
     this.cdref.detectChanges();
-    // this.gridData.forEach(tr => {
-    //   if (tr.length > 9) {
-    //     this.tableHeaders.forEach(th => {
-    //       th.hidden = true;
-    //     })
-    //     this.cdref.detectChanges();
-    //   }
-    // })
-
-    // debugger
-    // this.dataTable = this.providedData;
   }
-
-  openModal() {
+  openModal(index = null) {
     const modalRef = this.modalService.open(ModalFormComponent);
+    if (index != null) {
+      modalRef.componentInstance.index = index;
+    }
     modalRef.result.then((result: any) => {
       if (result) {
-
-        // this.removeAllEmployee(this.employees());
         if (!localStorage.getItem('data')) {
-          // result.skills = []
-          // const dataArray = { employees: [result] };
+          localStorage.setItem('data', JSON.stringify([result]));
+          this.gridData = JSON.parse(localStorage.getItem('data')!);
 
-          const data = this.objIteration(result);
-          // dataArray.employees.push(result.skills = []);
-          localStorage.setItem('data', JSON.stringify(data));
-          this.providedData = JSON.parse(localStorage.getItem('data')!);
-
-          // this.addEmployee();
-          // this.tableInt();
         } else {
           const dataHolder = JSON.parse(localStorage.getItem('data')!);
-          // result.skills = [];
-          const data = this.objIteration(result);
-          dataHolder.push(...data);
+
+          if (!isNaN(result?.index)) {
+            dataHolder[result.index] = result;
+          }
+          else {
+            dataHolder.push(result);
+          }
+
           localStorage.setItem('data', JSON.stringify(dataHolder));
-          this.providedData = JSON.parse(localStorage.getItem('data')!);
-          // this.addEmployee()
-          // this.tableInt();
+          this.gridData = JSON.parse(localStorage.getItem('data')!);
         }
-        this.checkIds = [];
-        let cb = document.querySelectorAll('input:checked');
+
       }
     });
   }
 
+
+  processModel() {
+    const modalRef = this.modalService.open(ProcessModalComponent);
+
+
+    modalRef.result.then((result: any) => {
+      if (result) {
+        console.log(true);
+        this.export();
+      }
+    });
+  }
   export() {
     TableUtil.exportTableToExcel("ExampleMaterialTable");
-  }
-
-  getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
-
-  calcAll() {
-
-    this.tableHeaders.forEach(element => {
-      element.hidden = false;
-    })
-
-    this.gridData.forEach(tr => {
-      if (tr.length <= 9) {
-        let x = (Math.random() > 0.5) ? 1 : 0;
-        console.log(x);
-
-        this.sampleData[x].forEach(sample => {
-          tr.push(sample);
-        });
-      }
-    })
-
-    localStorage.setItem('data', JSON.stringify(this.gridData));
-
-  }
-
-  objIteration(data): any {
-
-    let tableTr = [];
-    let tableTd = [];
-    Object.keys(data).forEach(key => {
-      // holdData.push(item[key]);
-      tableTd.push(data[key]);
-    });
-
-    tableTr.push(tableTd);
-    this.gridData.push(tableTd);
-    return tableTr;
   }
 
   employees(): FormArray {
@@ -335,10 +179,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   addEmployeeSkill(empIndex: number) {
 
     this.employeeSkills(empIndex).push(this.newSkill());
-    // this.providedData.employees[empIndex]?.skills.forEach((element: any, idx: number) => {
-    //   this.employeeSkills(empIndex).push(this.newSkill(element));
-    // })
-    // this.cdref.detectChanges();
+
   }
 
   addEmployeeSkillLoop(empIndex: number) {
@@ -377,38 +218,23 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     // this.checkIds.push(id);
   }
 
-  calcSingle() {
-    this.tableHeaders.forEach(element => {
-      element.hidden = false;
-    });
-    this.checkIds.forEach(id => {
-      if (this.gridData[id].length > 9) {
-        this.gridData[id].splice(9, this.gridData[id].length);
-        let x = (Math.random() > 0.5) ? 1 : 0;
-
-        this.sampleData[x].forEach(sample => {
-          this.gridData[id].push(sample);
-        });
-      } else {
-        let x = (Math.random() > 0.5) ? 1 : 0;
-        this.sampleData[x].forEach(sample => {
-          this.gridData[id].push(sample);
-        });
-      }
-    })
-
-
-
-
-
+  view(index) {
     const modalRef = this.modalService.open(DataListingComponent);
-    modalRef.componentInstance.values = this.gridData;
+    modalRef.componentInstance.values = this.gridData[index];
     modalRef.result.then((result: any) => {
       if (result) {
-
-      
       }
     });
+  }
 
+
+  delete(index: number) {
+    this.gridData.splice(index, 1);
+    localStorage.setItem('data', JSON.stringify(this.gridData));
+  }
+
+  edit(i) {
+    this.openModal(i);
+   
   }
 }

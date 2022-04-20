@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Process Model</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body" style="height: 200px;">
+    <div *ngIf="showLoader" class="loader"></div>
+
+    <div *ngIf="!showLoader" class="text-center">
+        <button class="btn btn-primary" (click)="passBack();"> Export Excel</button>
+    </div>
+
+</div>

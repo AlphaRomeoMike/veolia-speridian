@@ -1,4 +1,3 @@
-
 <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Maintenance Cost Estimating Model</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
@@ -8,80 +7,132 @@
 <div class="modal-body">
 
 
-         <div class="card">
-            <div class="card-header">
-                View
-            </div>
-            <div class="card-body">
-                <!-- 5th input -->
-                <div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Unit or Equipment Functional Description</label>
-                        :&nbsp;
-                        <small id="emailHelp" class="form-text text-muted">{{values[0][0]}}</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Asset Type</label>
-                        :&nbsp;
-                        <small id="emailHelp" class="form-text text-muted">{{values[0][1]}}</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Style</label>
-                        :&nbsp;
-                        <small id="emailHelp" class="form-text text-muted">{{values[0][2]}}</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">size</label>
-                        :&nbsp;
-                        <small id="emailHelp" class="form-text text-muted">{{values[0][3]}}</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Duty/Application</label>
-                        :&nbsp;
-                        <small id="emailHelp" class="form-text text-muted">{{values[0][4]}}</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Quality</label>
-                        :&nbsp;
-                        <small id="emailHelp" class="form-text text-muted">{{values[0][5]}}</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Qty</label>
-                        :&nbsp;
-                        <small id="emailHelp" class="form-text text-muted">{{values[0][6]}}</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Load %</label>
-                        :&nbsp;
-                        <small id="emailHelp" class="form-text text-muted">{{values[0][7]}}</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Life %</label>
-                        :&nbsp;
-                        <small id="emailHelp" class="form-text text-muted">{{values[0][8]}}</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Unit Template Descripton</label>
-                        :&nbsp;
-                        <small id="emailHelp" class="form-text text-muted">{{values[0][9]}}</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Unit Template Application	</label>
-                        :&nbsp;
-                        <small id="emailHelp" class="form-text text-muted">{{values[0][10]}}</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Units</label>
-                        :&nbsp;
-                        <small id="emailHelp" class="form-text text-muted">{{values[0][11]}}</small>
-                    </div>
-                </div>
+    <div class="card">
+        <div class="card-header">
+            View
+        </div>
+        <div class="card-body">
+            <!-- 5th input -->
+            <div>
 
+            
+                <ul class="list-group">
+                    <li class="list-group-item">Unit or Equipment Functional Description
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.unit}}</small>
+                    </li>
 
+                    <li class="list-group-item">Style
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.style}}</small>
+                    </li>
+                    <li class="list-group-item">size
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.size}}</small>
+                    </li>
+                    <li class="list-group-item">Duty/Application
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.duty}}</small>
+                    </li>
+                    <li class="list-group-item">Quality
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.quality}}</small>
+                    </li>
+                    <li class="list-group-item">Qty
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.quantity}}</small>
+                    </li>
 
-               
+                    <li class="list-group-item">Load %
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.load}}</small>
+                    </li>
+                    <li class="list-group-item">Life %
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.life}}</small>
+                    </li>
+                    <li class="list-group-item">
+                        Unit Template Descripton
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.unitTemplateDescripton}}</small>
+                    </li>
+
+                    <li class="list-group-item">
+                        Unit Template Application
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.unitTemplateApplication}}</small>
+                    </li>
+                    <li class="list-group-item">
+                        Units
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.units}}</small>
+                    </li>
+
+                    <li class="list-group-item">
+                        Rev.
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.rev}}</small>
+                    </li>
+                    <li class="list-group-item">
+                        Avg. Year
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.avgYear}}</small>
+                    </li>
+                    <li class="list-group-item">
+                        AYear 1
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.year1}}</small>
+                    </li>
+                    <li class="list-group-item">
+                        AYear 2
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.year2}}</small>
+                    </li>
+                    <li class="list-group-item">
+                        AYear 3
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.year3}}</small>
+                    </li>
+                    <li class="list-group-item">
+                        AYear 4
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.year4}}</small>
+                    </li>
+                    <li class="list-group-item">
+                        AYear 5
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.year5}}</small>
+                    </li>
+                    <li class="list-group-item">
+                        AYear 6
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.year6}}</small>
+                    </li>
+                    <li class="list-group-item">
+                        AYear 7
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.year7}}</small>
+                    </li>
+                    <li class="list-group-item">
+                        AYear 8
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.year8}}</small>
+                    </li>
+                    <li class="list-group-item">
+                        AYear 9
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.year9}}</small>
+                    </li>
+                    <li class="list-group-item">
+                        AYear 10
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.year10}}</small>
+                    </li>
+
+                </ul>
+             
             </div>
         </div>
-    
-    <button (click)="passBack()" type="submit" class="btn btn-primary w-100">Close</button>
-</div>
+
+        <button (click)="passBack()" type="submit" class="btn btn-primary w-100">Close</button>
+    </div>

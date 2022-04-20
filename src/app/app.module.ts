@@ -10,6 +10,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
 import { ModalFormComponent } from './modal-form/modal-form.component';
 import { DataListingComponent } from './data-listing/data-listing.component';
+import { LandingComponent } from './landing/landing.component';
+import { UserlayoutComponent } from './userlayout/userlayout.component';
+import { UserHeaderComponent } from './user-header/user-header.component';
+import { AdminlayoutComponent } from './adminlayout/adminlayout.component';
+import { LandingAdminComponent } from './landing-admin/landing-admin.component';
+import { ProcessModalComponent } from './process-modal/process-modal.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +23,13 @@ import { DataListingComponent } from './data-listing/data-listing.component';
     LoginComponent,
     DashboardComponent,
     ModalFormComponent,
-    DataListingComponent
+    DataListingComponent,
+    LandingComponent,
+    UserlayoutComponent,
+    UserHeaderComponent,
+    AdminlayoutComponent,
+    LandingAdminComponent,
+    ProcessModalComponent
   ],
   imports: [
     BrowserModule,

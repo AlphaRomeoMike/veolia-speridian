@@ -6,8 +6,8 @@
 </div>
 <div class="modal-body">
 
- 
-    <form [formGroup]="form">
+
+    <form [formGroup]="form" novalidate (ngSubmit)="passBack()">
         <div class="card">
             <div class="card-header">
                 Please add data
@@ -16,17 +16,17 @@
                 <!-- 5th input -->
                 <div class="form-group">
                     <label for="unit">Unit or Equipment Functional Description</label>
-                    <input id="typeahead-focus" type="text" class="form-control"  
-                        formControlName="unit" [ngbTypeahead]="search"
+                    <input id="typeahead-focus" type="text"
+                        class="form-control" formControlName="unit" [ngbTypeahead]="search"
                         (focus)="focus$.next($any($event).target.value)"
-                        (click)="click$.next($any($event).target.value)" #instance="ngbTypeahead"
-                         />
+                        (click)="click$.next($any($event).target.value)" #instance="ngbTypeahead" />
                     <!-- <input type="number" formControlName="quantity" class="form-control"> -->
                 </div>
 
                 <div class="form-group">
                     <label for="style">Style</label>
-                    <input type="text" formControlName="style" class="form-control">
+                    <input type="text" [ngClass]="{ 'is-invalid': submitted && f.style.errors }" formControlName="style"
+                        class="form-control">
                 </div>
                 <!-- 2nd input -->
                 <div class="form-group">
@@ -64,15 +64,11 @@
                     <input type="number" formControlName="life" class="form-control">
                 </div>
 
-                
-                
-                <!-- 9th input -->
-                <div class="form-group">
-                    <label for="type">Asset type</label>
-                    <input type="text" formControlName="type" class="form-control">
-                </div>
+
+
+
             </div>
         </div>
+        <button type="submit" class="btn btn-primary w-100">{{btnTxt}}</button>
     </form>
-    <button (click)="passBack()" type="submit" class="btn btn-primary w-100">Submit</button>
 </div>

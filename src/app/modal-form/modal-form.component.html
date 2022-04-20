@@ -5,6 +5,8 @@
     </button>
 </div>
 <div class="modal-body">
+
+ 
     <form [formGroup]="form">
         <div class="card">
             <div class="card-header">
@@ -31,6 +33,17 @@
                 <div class="form-group">
                     <label for="quantity">Quantity</label>
                     <input type="number" formControlName="quantity" class="form-control">
+                </div>
+                
+                <!-- 5th input -->
+                <div class="form-group">
+                    <label for="quantity">search for a state</label>
+                    <input id="typeahead-focus" type="text" class="form-control"  
+                        formControlName="newControl" [ngbTypeahead]="search"
+                        (focus)="focus$.next($any($event).target.value)"
+                        (click)="click$.next($any($event).target.value)" #instance="ngbTypeahead"
+                         />
+                    <!-- <input type="number" formControlName="quantity" class="form-control"> -->
                 </div>
             </div>
         </div>

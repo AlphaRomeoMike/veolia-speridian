@@ -1,1 +1,87 @@
-<p>data-listing works!</p>
+
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Maintenance Cost Estimating Model</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+
+
+         <div class="card">
+            <div class="card-header">
+                View
+            </div>
+            <div class="card-body">
+                <!-- 5th input -->
+                <div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Unit or Equipment Functional Description</label>
+                        :&nbsp;
+                        <small id="emailHelp" class="form-text text-muted">{{values[0][0]}}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Asset Type</label>
+                        :&nbsp;
+                        <small id="emailHelp" class="form-text text-muted">{{values[0][1]}}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Style</label>
+                        :&nbsp;
+                        <small id="emailHelp" class="form-text text-muted">{{values[0][2]}}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">size</label>
+                        :&nbsp;
+                        <small id="emailHelp" class="form-text text-muted">{{values[0][3]}}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Duty/Application</label>
+                        :&nbsp;
+                        <small id="emailHelp" class="form-text text-muted">{{values[0][4]}}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Quality</label>
+                        :&nbsp;
+                        <small id="emailHelp" class="form-text text-muted">{{values[0][5]}}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Qty</label>
+                        :&nbsp;
+                        <small id="emailHelp" class="form-text text-muted">{{values[0][6]}}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Load %</label>
+                        :&nbsp;
+                        <small id="emailHelp" class="form-text text-muted">{{values[0][7]}}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Life %</label>
+                        :&nbsp;
+                        <small id="emailHelp" class="form-text text-muted">{{values[0][8]}}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Unit Template Descripton</label>
+                        :&nbsp;
+                        <small id="emailHelp" class="form-text text-muted">{{values[0][9]}}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Unit Template Application	</label>
+                        :&nbsp;
+                        <small id="emailHelp" class="form-text text-muted">{{values[0][10]}}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Units</label>
+                        :&nbsp;
+                        <small id="emailHelp" class="form-text text-muted">{{values[0][11]}}</small>
+                    </div>
+                </div>
+
+
+
+               
+            </div>
+        </div>
+    
+    <button (click)="passBack()" type="submit" class="btn btn-primary w-100">Close</button>
+</div>

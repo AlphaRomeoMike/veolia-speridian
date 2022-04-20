@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -7,16 +7,19 @@ import { NgbActiveModal, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./data-listing.component.scss']
 })
 export class DataListingComponent implements OnInit {
-
-  @ViewChild('instance', { static: true }) instance: NgbTypeahead;
+  @Input() values;
   constructor(
+
     public activeModal: NgbActiveModal
   ) { }
 
   ngOnInit(): void {
   }
 
+
+
   passBack() {
+    // this.passEntry.emit(this.data);
     this.activeModal.close();
   }
 

@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalFormComponent } from '../modal-form/modal-form.component';
 import { FormArray, FormBuilder, FormControl, FormGroup, } from '@angular/forms';
 import { TableUtil } from '../tableUtil';
+import { DataListingComponent } from '../data-listing/data-listing.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -227,8 +228,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           // this.addEmployee()
           // this.tableInt();
         }
-      this.checkIds = [];
-      let cb = document.querySelectorAll('input:checked');
+        this.checkIds = [];
+        let cb = document.querySelectorAll('input:checked');
       }
     });
   }
@@ -371,7 +372,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     } else {
       this.checkIds.splice(id, 1);
     }
-    
+
 
     // this.checkIds.push(id);
   }
@@ -395,5 +396,19 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         });
       }
     })
+
+
+
+
+
+    const modalRef = this.modalService.open(DataListingComponent);
+    modalRef.componentInstance.values = this.gridData;
+    modalRef.result.then((result: any) => {
+      if (result) {
+
+      
+      }
+    });
+
   }
 }

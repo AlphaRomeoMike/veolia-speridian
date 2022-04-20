@@ -12,7 +12,7 @@ import * as XLSX from 'xlsx';
 export class MasterImportComponent implements OnInit {
   keys: string[];
   storedKeys: string[];
-  storedData: any = localStorage.getItem('master') ? JSON.parse(localStorage.getItem('master')) : null;
+  storedData: any = localStorage.getItem('master') ? JSON.parse(localStorage.getItem('master')) : [];
   dataSheet = new Subject();
   @ViewChild('inputFile') inputFile: ElementRef;
   isExcelFile: boolean;

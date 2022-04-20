@@ -1,45 +1,110 @@
 <button (click)="openModal()" class="btn btn-primary mt-2">Add data</button>
 
 
-<form [formGroup]="empForm" (ngSubmit)="onSubmit()">
-  <div formArrayName="employees">
-    <div *ngFor="let employee of employees().controls; let empIndex=index; trackBy:identify">
-      <div
-        [formGroupName]="empIndex"
-        style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;"
-      >
-        {{empIndex}} Style:
-        <input type="text" formControlName="style" />
-        Size:
-        <input type="text" formControlName="size" />
-        Duty:
-        <input type="text" formControlName="duty" />
-        Quantity:
-        <input type="text" formControlName="quantity" />
+<!-- <form [formGroup]="empForm" (ngSubmit)="onSubmit()">
+    <div formArrayName="employees">
+        <div *ngFor="let employee of employees().controls; let empIndex=index; trackBy:identify">
+            <div [formGroupName]="empIndex" style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;">
+                {{empIndex}} Style:
+                <input type="text" formControlName="style" />
+                Size:
+                <input type="text" formControlName="size" />
+                Duty:
+                <input type="text" formControlName="duty" />
+                Quantity:
+                <input type="text" formControlName="quantity" />
 
-        <!-- <button (click)="removeEmployee(empIndex)">Remove</button> -->
+                <button (click)="removeEmployee(empIndex)">Remove</button>
 
-        <div formArrayName="skills">
-          <div
-            *ngFor="let skill of employeeSkills(empIndex).controls; let skillIndex=index"
-          >
-            <div [formGroupName]="skillIndex">
-              {{skillIndex}} Column :
-              <input type="text" formControlName="column" />
+                <div formArrayName="skills">
+                    <div *ngFor="let skill of employeeSkills(empIndex).controls; let skillIndex=index">
+                        <div [formGroupName]="skillIndex">
+                            {{skillIndex}} Column :
+                            <input type="text" formControlName="column" />
 
-              <!-- <button (click)="removeEmployeeSkill(empIndex,skillIndex)">
+                            <button (click)="removeEmployeeSkill(empIndex,skillIndex)">
                 Remove
-              </button> -->
+              </button>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" (click)="addEmployeeSkill(empIndex)">
+                    Add Skill
+                </button>
             </div>
-          </div>
         </div>
-        <button type="button" (click)="addEmployeeSkill(empIndex)">
-          Add Skill
-        </button>
-      </div>
+        <button type="button" (click)="onUpdate()">Update</button>
     </div>
-    <button type="button" (click)="onUpdate()">Update</button>
-  </div>
-</form>
+</form> -->
 
-{{this.empForm.value | json}}
+
+
+<ng-container *ngIf="employees().controls.length">
+
+    <form [formGroup]="empForm" (ngSubmit)="onSubmit()">
+        <div class="float-end">
+            <button type="button" (click)="onUpdate()">Update</button>
+        </div>
+        <div formArrayName="employees" class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <!-- <th scope="col">Style</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Duty</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Actions</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let employee of employees().controls; let empIndex=index; trackBy:identify">
+    
+                        <ng-container [formGroupName]="empIndex">
+                            <th scope="row">{{ empIndex + 1 }}</th>
+                            <td>
+                                {{empIndex}} Style:
+                                <input type="text" formControlName="style" />
+                            </td>
+    
+                            <td>
+                                Size:
+                                <input type="text" formControlName="size" />
+                            </td>
+                            <td>
+                                Duty:
+                                <input type="text" formControlName="duty" />
+                            </td>
+                            <td>
+                                Quantity:
+                                <input type="text" formControlName="quantity" />
+                            </td>
+    
+                            <ng-container formArrayName="skills">
+                                <td *ngFor="let skill of employeeSkills(empIndex).controls; let skillIndex=index">
+                                    <ng-container [formGroupName]="skillIndex">
+                                        {{skillIndex}} Column :
+                                        <input type="text" formControlName="column" />
+    
+                                        <!-- <button (click)="removeEmployeeSkill(empIndex,skillIndex)">
+                                        Remove
+                                        </button> -->
+                                    </ng-container>
+                                </td>
+                            </ng-container>
+    
+                            <td>
+                                <button type="button" (click)="addEmployeeSkill(empIndex)">
+                                    Add Skill
+                                </button>
+                            </td>
+    
+                        </ng-container>
+    
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</ng-container>
+<!-- {{this.empForm.value | json}} -->

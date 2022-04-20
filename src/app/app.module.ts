@@ -16,6 +16,8 @@ import { UserHeaderComponent } from './user-header/user-header.component';
 import { AdminlayoutComponent } from './adminlayout/adminlayout.component';
 import { LandingAdminComponent } from './landing-admin/landing-admin.component';
 import { ProcessModalComponent } from './process-modal/process-modal.component';
+import { MasterImportComponent } from './admin/master-import/master-import.component';
+import { GridModule } from '@progress/kendo-angular-grid';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { ProcessModalComponent } from './process-modal/process-modal.component';
     UserHeaderComponent,
     AdminlayoutComponent,
     LandingAdminComponent,
-    ProcessModalComponent
+    ProcessModalComponent, 
+    MasterImportComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +41,7 @@ import { ProcessModalComponent } from './process-modal/process-modal.component';
     ReactiveFormsModule,
     RouterModule,
     FormsModule,
+    GridModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
 
   constructor(public modalService: NgbModal, private fb: FormBuilder, private cdref: ChangeDetectorRef,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.tableHeaders = [
@@ -235,6 +235,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   edit(i) {
     this.openModal(i);
-   
+
   }
+
+  Dulicate(index) {
+    const duplicate = this.gridData[index];
+    this.gridData.push(duplicate);
+    localStorage.setItem('data', JSON.stringify(this.gridData));
+  }
+
 }

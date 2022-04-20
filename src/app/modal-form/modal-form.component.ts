@@ -6,14 +6,7 @@ import { Observable, Subject, merge, OperatorFunction } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 
 
-const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado',
-  'Connecticut', 'Delaware', 'District Of Columbia', 'Federated States Of Micronesia', 'Florida', 'Georgia',
-  'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine',
-  'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana',
-  'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-  'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island',
-  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Islands', 'Virginia',
-  'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+const states = ['Aer Tank 1 Diffusers', 'Aer Tank 2 Diffusers', 'Aer Tank 3 Diffusers', 'Aer Tank 4 Diffusers','Back Flow Preventor, Allard', 'Back Flow Preventor, Bay', 'Back Flow Preventor, Burnham', 'Youlden, Back Flow Preventor', 'Pump Station, Allard', 'Heater, Gleason'];
 @Component({
   selector: 'app-modal-form',
   templateUrl: './modal-form.component.html',
@@ -38,7 +31,10 @@ export class ModalFormComponent implements OnInit {
       size: new FormControl(''),
       duty: new FormControl(''),
       quantity: new FormControl(''),
-      newControl: new FormControl(''),
+      quality: new FormControl(''),
+      unit: new FormControl(''),
+      load: new FormControl(''),
+      life: new FormControl(''),
     })
   }
 

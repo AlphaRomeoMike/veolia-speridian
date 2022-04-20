@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Simple modal</h4>
+    <h4 class="modal-title" id="modal-basic-title">Maintenance Cost Estimating Model</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -13,6 +13,17 @@
                 Please add data
             </div>
             <div class="card-body">
+                <!-- 5th input -->
+                <div class="form-group">
+                    <label for="unit">Unit or Equipment Functional Description</label>
+                    <input id="typeahead-focus" type="text" class="form-control"  
+                        formControlName="unit" [ngbTypeahead]="search"
+                        (focus)="focus$.next($any($event).target.value)"
+                        (click)="click$.next($any($event).target.value)" #instance="ngbTypeahead"
+                         />
+                    <!-- <input type="number" formControlName="quantity" class="form-control"> -->
+                </div>
+
                 <div class="form-group">
                     <label for="style">Style</label>
                     <input type="text" formControlName="style" class="form-control">
@@ -25,28 +36,43 @@
 
                 <!-- 3rd input -->
                 <div class="form-group">
-                    <label for="duty">Duty</label>
+                    <label for="duty">Duty/Application</label>
                     <input type="text" formControlName="duty" class="form-control">
+                </div>
+
+                <!-- 8th input -->
+                <div class="form-group">
+                    <label for="quality">Quality</label>
+                    <input type="text" formControlName="quality" class="form-control">
                 </div>
 
                 <!-- 4th input -->
                 <div class="form-group">
-                    <label for="quantity">Quantity</label>
+                    <label for="quantity">Qty</label>
                     <input type="number" formControlName="quantity" class="form-control">
                 </div>
-                
-                <!-- 5th input -->
+
+                <!-- 6th input -->
                 <div class="form-group">
-                    <label for="quantity">search for a state</label>
-                    <input id="typeahead-focus" type="text" class="form-control"  
-                        formControlName="newControl" [ngbTypeahead]="search"
-                        (focus)="focus$.next($any($event).target.value)"
-                        (click)="click$.next($any($event).target.value)" #instance="ngbTypeahead"
-                         />
-                    <!-- <input type="number" formControlName="quantity" class="form-control"> -->
+                    <label for="load">Load %</label>
+                    <input type="number" formControlName="load" class="form-control">
+                </div>
+
+                <!-- 7th input -->
+                <div class="form-group">
+                    <label for="life">Life %</label>
+                    <input type="number" formControlName="life" class="form-control">
+                </div>
+
+                
+                
+                <!-- 9th input -->
+                <div class="form-group">
+                    <label for="type">Asset type</label>
+                    <input type="text" formControlName="type" class="form-control">
                 </div>
             </div>
         </div>
     </form>
-    <button (click)="passBack()" type="submit" class="btn btn-primary w-100">Pass back</button>
+    <button (click)="passBack()" type="submit" class="btn btn-primary w-100">Submit</button>
 </div>

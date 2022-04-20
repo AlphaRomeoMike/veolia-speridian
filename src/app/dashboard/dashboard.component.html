@@ -1,4 +1,16 @@
-<button (click)="openModal()" class="btn btn-primary mt-2">Add data</button>
+<div class="row mt-4">
+  <div class="col-md-2">
+    <button (click)="openModal()" class="btn btn-primary">Add data</button>
+  </div>
+  <div class="col-md-2">
+    <button class="btn btn-primary" (click)="calcAll()">Caculate All Results</button>
+  </div>
+  <div class="col-md-2">
+
+    <button class="btn btn-primary" (click)="calcSingle()">Caculate Single</button>
+  </div>
+
+</div>
 
 
 <!-- <form [formGroup]="empForm" (ngSubmit)="onSubmit()">
@@ -109,28 +121,31 @@
 </ng-container> -->
 
 
+
 <div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
+  <table class="table table-striped" id="ExampleMaterialTable" *ngIf="gridData.length">
+    <thead>
+      <tr>
 
-                <ng-container *ngFor="let tableHeader of tableHeaders; let i= index;">
-                    <th scope="col" *ngIf="!tableHeader.hidden">{{ tableHeader.text }}</th>
-                </ng-container>
+        <th>#</th>
+        <ng-container *ngFor="let tableHeader of tableHeaders; let i= index;">
+          <th scope="col" *ngIf="!tableHeader.hidden">{{ tableHeader.text }}</th>
+        </ng-container>
 
-                <!-- <th scope="col">Country</th>
-                <th scope="col">Area</th>
-                <th scope="col">Population</th> -->
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let objGrid of gridData;index as i">
-                <td *ngFor="let objTd of objGrid;">{{objTd}}</td>
-                <!-- <td *ngFor="let objData of gridData[i]; ">{{ objData.text }}</td> -->
-            </tr>
-        </tbody>
-    </table>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let objGrid of gridData;index as i" #trRef>
+        <td>
+          <input type="checkbox" class="uncheck" (click)="onChecked($event, i)" id="{{i}}" />
+        </td>
+        <td *ngFor="let objTd of objGrid;">{{objTd}}</td>
+        <!-- <td *ngFor="let objData of gridData[i]; ">{{ objData.text }}</td> -->
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-{{gridData | json}}
+<button *ngIf="gridData.length" class="btn btn-primary" (click)="export()">Export as Excel</button>
+
 <!-- {{this.empForm.value | json}} -->

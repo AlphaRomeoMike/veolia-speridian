@@ -9,13 +9,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
 import { ModalFormComponent } from './modal-form/modal-form.component';
+import { DataListingComponent } from './data-listing/data-listing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    ModalFormComponent
+    ModalFormComponent,
+    DataListingComponent
   ],
   imports: [
     BrowserModule,

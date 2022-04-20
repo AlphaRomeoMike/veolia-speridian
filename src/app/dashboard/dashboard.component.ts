@@ -1,7 +1,8 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalFormComponent } from '../modal-form/modal-form.component';
 import { FormArray, FormBuilder, FormControl, FormGroup, } from '@angular/forms';
+import { TableUtil } from '../tableUtil';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,10 +10,48 @@ import { FormArray, FormBuilder, FormControl, FormGroup, } from '@angular/forms'
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
+  @ViewChild('trRef', { static: true }) trRef: any;
   empForm!: FormGroup;
   providedData: any;
   tableHeaders: any[];
   gridData: any = [];
+  sampleData = [
+    [
+      'AERDIF - Aeration, coarse bubble diffused',
+      'outdoor, submerged, aggressive',
+      '2500ft',
+      'Draft',
+      '',
+      5057,
+      75,
+      75,
+      75,
+      605,
+      75,
+      75,
+      75,
+      605,
+      75,
+    ],
+    [
+      'BFPALL - Backflow preventer, 2 inch and less',
+      'Potable water, outdoor, warm climate',
+      'Unit',
+      'Draft',
+      '',
+      255,
+      1605,
+      105,
+      105,
+      105,
+      255,
+      105,
+      105,
+      105,
+      255,
+    ]
+  ];
+  checkIds = [];
 
   constructor(public modalService: NgbModal, private fb: FormBuilder, private cdref: ChangeDetectorRef) { }
 
@@ -48,10 +87,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       },
       {
         text: 'Load %',
-        hidden: false
-      },
-      {
-        text: 'Life %',
         hidden: false
       },
       {
@@ -129,7 +164,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.providedData = JSON.parse(localStorage.getItem('data')!);
     console.log(this.providedData);
 
+
     if (this.providedData) {
+
       this.tableInt();
       // this.addEmployee();
     }
@@ -137,6 +174,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   tableInt() {
     this.gridData = JSON.parse(localStorage.getItem('data')!);
+
+
     // this.providedData.forEach(item => {
     //   // let holdData = [];
     //   Object.keys(item).forEach(key => {
@@ -148,6 +187,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     //   // this.gridData.push(holdData.flat());
     // });
     this.cdref.detectChanges();
+    // this.gridData.forEach(tr => {
+    //   if (tr.length > 9) {
+    //     this.tableHeaders.forEach(th => {
+    //       th.hidden = true;
+    //     })
+    //     this.cdref.detectChanges();
+    //   }
+    // })
 
     // debugger
     // this.dataTable = this.providedData;
@@ -170,7 +217,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
           // this.addEmployee();
           // this.tableInt();
-        } else { 
+        } else {
           const dataHolder = JSON.parse(localStorage.getItem('data')!);
           // result.skills = [];
           const data = this.objIteration(result);
@@ -179,10 +226,40 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           this.providedData = JSON.parse(localStorage.getItem('data')!);
           // this.addEmployee()
           // this.tableInt();
-
         }
+      this.checkIds = [];
+      let cb = document.querySelectorAll('input:checked');
       }
     });
+  }
+
+  export() {
+    TableUtil.exportTableToExcel("ExampleMaterialTable");
+  }
+
+  getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  calcAll() {
+
+    this.tableHeaders.forEach(element => {
+      element.hidden = false;
+    })
+
+    this.gridData.forEach(tr => {
+      if (tr.length <= 9) {
+        let x = (Math.random() > 0.5) ? 1 : 0;
+        console.log(x);
+
+        this.sampleData[x].forEach(sample => {
+          tr.push(sample);
+        });
+      }
+    })
+
+    localStorage.setItem('data', JSON.stringify(this.gridData));
+
   }
 
   objIteration(data): any {
@@ -219,7 +296,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.employees().push(this.newEmployee(element));
       this.cdref.detectChanges();
       this.addEmployeeSkillLoop(idx);
-
     })
   }
 
@@ -287,5 +363,37 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   identify(index, item) {
     return index;
+  }
+
+  onChecked(event, id) {
+    if (event.target.checked) {
+      this.checkIds.push(id);
+    } else {
+      this.checkIds.splice(id, 1);
+    }
+    
+
+    // this.checkIds.push(id);
+  }
+
+  calcSingle() {
+    this.tableHeaders.forEach(element => {
+      element.hidden = false;
+    });
+    this.checkIds.forEach(id => {
+      if (this.gridData[id].length > 9) {
+        this.gridData[id].splice(9, this.gridData[id].length);
+        let x = (Math.random() > 0.5) ? 1 : 0;
+
+        this.sampleData[x].forEach(sample => {
+          this.gridData[id].push(sample);
+        });
+      } else {
+        let x = (Math.random() > 0.5) ? 1 : 0;
+        this.sampleData[x].forEach(sample => {
+          this.gridData[id].push(sample);
+        });
+      }
+    })
   }
 }

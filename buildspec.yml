@@ -1,0 +1,27 @@
+# SET TO LATEST VERSION
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+
+  pre_build:
+      commands:
+        - echo "Installing dependencies"
+        - npm i -g @angular/cli
+        - npm i
+  build:
+    commands:
+      - echo "Since there are no tests configured, we won't need any hassle for maintaining it 🤷‍♂️"
+      - echo "Your build can't fail if you don't write tests... 💯🚀"
+      - ng v
+      - echo "Building your project 🏭🏛"
+      - ng build
+      - cd dist/angular-template-demo
+      - ls -la
+      - echo "Deploying your project 🚀"
+      - aws s3 sync . s3://angular-veiola-frontend --delete
+      - echo "Your project is deployed 🚀"
+      - echo "Do something good with your project 🤓"
+      - echo "You can find your project at https://s3.amazonaws.com/angular-veiola-frontend/angular-veiola-frontend"

@@ -1,7 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
 import { State, process } from '@progress/kendo-data-query';
 import { Subject } from 'rxjs';
+import { EditMasterComponent } from 'src/app/edit-master/edit-master.component';
+import { ViewMasterComponent } from 'src/app/view-master/view-master.component';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -35,14 +38,15 @@ export class MasterImportComponent implements OnInit {
       ]
     }
   }
+  constructor(public modalService: NgbModal) { }
   public gridData: GridDataResult = process(this.storedData, this.state);
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-   dataStateChange(state: DataStateChangeEvent) {
+  dataStateChange(state: DataStateChangeEvent) {
     this.state = state;
     this.gridData = process(this.storedData, this.state);
-   }
+  }
 
   onChange(evt) {
     let data, header;
@@ -72,7 +76,7 @@ export class MasterImportComponent implements OnInit {
         this.keys = Object.keys(data[0]);
         this.dataSheet.next(data)
         console.log(data);
-        
+
         localStorage.setItem('master', JSON.stringify(data));
         localStorage.setItem('keys', JSON.stringify(this.keys));
       }
@@ -127,5 +131,43 @@ export class MasterImportComponent implements OnInit {
       },
     })
   }
+
+  view(index) {
+
+    const modalRef = this.modalService.open(ViewMasterComponent);
+    modalRef.componentInstance.values = this.gridData.data[index];
+    modalRef.result.then((result: any) => {
+      if (result) {
+      }
+    });
+  }
+
+
+  openModal(index = null) {
+    const modalRef = this.modalService.open(EditMasterComponent);
+    if (index != null) {
+      modalRef.componentInstance.index = index;
+    }
+    modalRef.result.then((result: any) => {
+    
+      const dataHolder = JSON.parse(localStorage.getItem('master')!);
+
+      if (!isNaN(result?.index)) {
+        dataHolder[result.index] = result;
+      }
+      else {
+        dataHolder.push(result);
+      }
+
+      localStorage.setItem('master', JSON.stringify(dataHolder));
+      this.gridData = JSON.parse(localStorage.getItem('data')!);
+
+    });
+}
+
+edit(i) {
+  this.openModal(i);
+
+}
 
 }

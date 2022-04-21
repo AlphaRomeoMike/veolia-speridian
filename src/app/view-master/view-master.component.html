@@ -1,0 +1,58 @@
+
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Master Model</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+
+
+    <div class="card">
+        <div class="card-header">
+            View
+        </div>
+        <div class="card-body">
+            <!-- 5th input -->
+            <div>
+
+            
+                <ul class="list-group">
+                    <li class="list-group-item">Unit Description
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.UnitDesc}}</small>
+                    </li>
+
+                    <li class="list-group-item">App Description
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.AppDesc}}</small>
+                    </li>
+                
+                    <li class="list-group-item">Ev1 Title
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.ReplCost}}</small>
+                    </li>
+
+                    <li class="list-group-item">Lifemos
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.Lifemos}}</small>
+                    </li>
+
+                    <li class="list-group-item">ReplCost
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.OHLife}}</small>
+                    </li>
+
+                    <li class="list-group-item">OHLife
+                        <br>
+                        <small id="emailHelp" class="form-text text-muted">{{values?.Ev1title}}</small>
+                    </li>
+
+               
+                </ul>
+             
+            </div>
+        </div>
+
+        <button (click)="passBack()" type="submit" class="btn btn-primary w-100">Close</button>
+    </div>

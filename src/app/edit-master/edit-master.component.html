@@ -1,0 +1,57 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Maintenance Cost Estimating Model</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+
+
+    <form [formGroup]="form" novalidate (ngSubmit)="passBack()">
+        <div class="card">
+            <div class="card-header">
+                Please add data
+            </div>
+            <div class="card-body">
+
+                <div class="form-group">
+                    <label for="style">UnitDesc</label>
+                    <input type="text" [ngClass]="{ 'is-invalid': submitted && f.style.errors }"
+                        formControlName="UnitDesc" class="form-control">
+                </div>
+                <!-- 2nd input -->
+                <div class="form-group">
+                    <label for="size">AppDesc</label>
+                    <input type="text" formControlName="AppDesc" class="form-control">
+                </div>
+
+                <!-- 3rd input -->
+                <div class="form-group">
+                    <label for="duty">ReplCost</label>
+                    <input type="text" formControlName="ReplCost" class="form-control">
+                </div>
+
+                <!-- 8th input -->
+                <div class="form-group">
+                    <label for="quality">Lifemos</label>
+                    <input type="text" formControlName="Lifemos" class="form-control">
+                </div>
+
+                <!-- 4th input -->
+                <div class="form-group">
+                    <label for="quantity">OHLife</label>
+                    <input type="text" formControlName="OHLife" class="form-control">
+                </div>
+
+                <!-- 6th input -->
+                <div class="form-group">
+                    <label for="load">Ev1title</label>
+                    <input type="text" formControlName="Ev1title" class="form-control">
+                </div>
+
+
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">{{btnTxt}}</button>
+    </form>
+</div>

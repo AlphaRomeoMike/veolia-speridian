@@ -20,6 +20,8 @@ import { MasterImportComponent } from './admin/master-import/master-import.compo
 import { GridModule } from '@progress/kendo-angular-grid';
 import { MasterLandingComponent } from './master-landing/master-landing.component';
 import { UserLandingComponent } from './user-landing/user-landing.component';
+import { EditMasterComponent } from './edit-master/edit-master.component';
+import { ViewMasterComponent } from './view-master/view-master.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,7 @@ import { UserLandingComponent } from './user-landing/user-landing.component';
     AdminlayoutComponent,
     LandingAdminComponent,
     ProcessModalComponent, 
-    MasterImportComponent, MasterLandingComponent, UserLandingComponent
+    MasterImportComponent, MasterLandingComponent, UserLandingComponent, EditMasterComponent, ViewMasterComponent
   ],
   imports: [
     BrowserModule,

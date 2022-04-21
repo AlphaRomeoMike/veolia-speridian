@@ -16,9 +16,9 @@
       </ng-template>
       <kendo-grid-column title="#">
         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-          {{rowIndex}}
-          <button kendoGridEditCommand type="button" [primary]="true">Edit</button>
-          <button kendoGridEditCommand type="button" [primary]="false"> View </button>
+       
+          <button kendoGridEditCommand type="button" [primary]="true" (click)="edit(rowIndex)">Edit</button>
+          <button kendoGridEditCommand type="button" [primary]="false" (click)="view(rowIndex)"> View </button>
         </ng-template>
       </kendo-grid-column>
       <kendo-grid-column field="UnitDesc" title="Unit Description"></kendo-grid-column>

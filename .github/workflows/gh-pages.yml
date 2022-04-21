@@ -18,7 +18,7 @@ jobs:
           node-version: "16"
       
       - name: "Install dependencies 📦"
-        run: npm i -g @angular/cli && npm run build && npm run build
+        run: npm i -g @angular/cli && npm i && npm run build
 
       - name: Deploy ☁🌪
         if: success()

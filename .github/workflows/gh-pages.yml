@@ -24,5 +24,6 @@ jobs:
         if: success()
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: "${{GITHUB_TOKEN}}"
+          github_token: "${{TOKEN}}"
           publish_dir: dist/angular-template-demo
+          enable_jekyll: true

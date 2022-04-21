@@ -23,10 +23,10 @@ export class LoginComponent implements OnInit {
 
   submit() {
     if (this.loginForm.controls['email'].value === 'admin' && this.loginForm.controls['password'].value === 'admin') {
-      this.router.navigate(['/admin/landing']);
+      this.router.navigate(['admin/master']);
     }
     else {
-      this.router.navigate(['/landing']);
+      this.router.navigate(['user/master']);
     }
 
   }

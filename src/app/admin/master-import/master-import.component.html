@@ -10,17 +10,25 @@
   </div>
   <div class="mt-3"></div>
   <div>
-    <kendo-grid [data]="gridData" (dataStateChange)="dataStateChange($event)"
-       class="table table-hover">
+    <kendo-grid [data]="gridData" (dataStateChange)="dataStateChange($event)" class="table table-hover">
       <ng-template kendoGridToolbarTemplate>
         <input placeholder="Search in all columns..." class="form-control" kendoTextBox (input)="onFilter($event)" />
       </ng-template>
+      <kendo-grid-column title="#">
+        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+          {{rowIndex}}
+          <button kendoGridEditCommand type="button" [primary]="true">Edit</button>
+          <button kendoGridEditCommand type="button" [primary]="false"> View </button>
+        </ng-template>
+      </kendo-grid-column>
       <kendo-grid-column field="UnitDesc" title="Unit Description"></kendo-grid-column>
       <kendo-grid-column field="AppDesc" title="App Description"> </kendo-grid-column>
       <kendo-grid-column field="Ev1title" title="Ev1 Title"> </kendo-grid-column>
       <kendo-grid-column field="Lifemos" title="Lifemos"> </kendo-grid-column>
       <kendo-grid-column field="ReplCost" title="ReplCost"> </kendo-grid-column>
       <kendo-grid-column field="OHLife" title="OHLife"> </kendo-grid-column>
+
+
     </kendo-grid>
   </div>
 </div>

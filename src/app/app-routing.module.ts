@@ -5,10 +5,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LandingAdminComponent } from './landing-admin/landing-admin.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
+import { MasterLandingComponent } from './master-landing/master-landing.component';
+import { UserLandingComponent } from './user-landing/user-landing.component';
 import { UserlayoutComponent } from './userlayout/userlayout.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
+  { path: 'admin/master', component: MasterLandingComponent },
+  { path: 'user/master', component: UserLandingComponent },
 
   // App user routes goes here here
   {

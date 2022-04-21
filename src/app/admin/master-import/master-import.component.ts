@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
 import { State, process } from '@progress/kendo-data-query';
 import { Subject } from 'rxjs';
@@ -37,6 +38,15 @@ export class MasterImportComponent implements OnInit {
   }
   public gridData: GridDataResult = process(this.storedData, this.state);
 
+
+  /**
+   *
+   */
+  constructor(
+    private route: ActivatedRoute, 
+    private router: Router) {
+
+  }
   ngOnInit(): void {}
 
    dataStateChange(state: DataStateChangeEvent) {
@@ -76,9 +86,16 @@ export class MasterImportComponent implements OnInit {
         localStorage.setItem('master', JSON.stringify(data));
         localStorage.setItem('keys', JSON.stringify(this.keys));
       }
+      this.reload();
     } else {
       this.inputFile.nativeElement.value = '';
     }
+  }
+
+  reload() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['./'], { relativeTo: this.route });
   }
 
   removeData() {

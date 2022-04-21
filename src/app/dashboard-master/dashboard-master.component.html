@@ -1,0 +1,50 @@
+<div class=" mt-4  text-end mb-3">
+
+    <button (click)="openModal()" class="btn btn-primary float-right">Add data</button>
+    &nbsp;
+    <button *ngIf="gridData.length" (click)="processModel()" class="btn btn-primary float-right">Process Model </button>
+
+</div>
+
+
+<div class="row">
+
+    <table class="table table-striped" id="ExampleMaterialTable" *ngIf="gridData.length">
+        <thead>
+            <tr>
+
+                <th>#</th>
+                <ng-container *ngFor="let tableHeader of tableHeaders; let i= index;">
+                    <th scope="col" *ngIf="!tableHeader.hidden">{{ tableHeader.text }}</th>
+                </ng-container>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let objGrid of gridData;index as i" #trRef>
+                <td>
+                    <div ngbDropdown class="d-inline-block" display="static">
+                        <button type="button" class="btn btn-outline-primary" id="dropdownBasic1"
+                            ngbDropdownToggle>Actions</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <button ngbDropdownItem (click)="view(i)">View</button>
+                            <button ngbDropdownItem (click)="edit(i)">Edit</button>
+                            <button ngbDropdownItem (click)="Dulicate(i)">Dulicate</button>
+                            <button ngbDropdownItem (click)="delete(i)">Delete</button>
+                        </div>
+                    </div>
+                    <!-- <input type="checkbox" class="uncheck" (click)="onChecked($event, i)" id="{{i}}" /> -->
+                </td>
+
+                <td *ngIf="objGrid?.unit">{{objGrid?.unit}}</td>
+                <td *ngIf="objGrid?.style">{{objGrid?.style}}</td>
+                <td *ngIf="objGrid?.size">{{objGrid?.size}}</td>
+                <td *ngIf="objGrid?.duty">{{objGrid?.duty}}</td>
+                <td *ngIf="objGrid?.quality">{{objGrid?.quality}}</td>
+                <td *ngIf="objGrid?.quantity">{{objGrid?.quantity}}</td>
+                <td *ngIf="objGrid?.load">{{objGrid?.load}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

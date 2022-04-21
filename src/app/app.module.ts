@@ -22,6 +22,7 @@ import { MasterLandingComponent } from './master-landing/master-landing.componen
 import { UserLandingComponent } from './user-landing/user-landing.component';
 import { EditMasterComponent } from './edit-master/edit-master.component';
 import { ViewMasterComponent } from './view-master/view-master.component';
+import { DashboardMasterComponent } from './dashboard-master/dashboard-master.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { ViewMasterComponent } from './view-master/view-master.component';
     AdminlayoutComponent,
     LandingAdminComponent,
     ProcessModalComponent, 
-    MasterImportComponent, MasterLandingComponent, UserLandingComponent, EditMasterComponent, ViewMasterComponent
+    MasterImportComponent, MasterLandingComponent, UserLandingComponent, EditMasterComponent, ViewMasterComponent, DashboardMasterComponent
   ],
   imports: [
     BrowserModule,

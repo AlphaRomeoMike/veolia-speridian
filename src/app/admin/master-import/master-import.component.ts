@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
 import { State, process } from '@progress/kendo-data-query';
@@ -38,9 +39,17 @@ export class MasterImportComponent implements OnInit {
       ]
     }
   }
-  constructor(public modalService: NgbModal) { }
   public gridData: GridDataResult = process(this.storedData, this.state);
 
+
+  /**
+   *
+   */
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router, public modalService: NgbModal) {
+
+  }
   ngOnInit(): void { }
 
   dataStateChange(state: DataStateChangeEvent) {
@@ -80,9 +89,16 @@ export class MasterImportComponent implements OnInit {
         localStorage.setItem('master', JSON.stringify(data));
         localStorage.setItem('keys', JSON.stringify(this.keys));
       }
+      this.reload();
     } else {
       this.inputFile.nativeElement.value = '';
     }
+  }
+
+  reload() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['./'], { relativeTo: this.route });
   }
 
   removeData() {
@@ -149,7 +165,7 @@ export class MasterImportComponent implements OnInit {
       modalRef.componentInstance.index = index;
     }
     modalRef.result.then((result: any) => {
-    
+
       const dataHolder = JSON.parse(localStorage.getItem('master')!);
 
       if (!isNaN(result?.index)) {
@@ -163,11 +179,11 @@ export class MasterImportComponent implements OnInit {
       this.gridData = JSON.parse(localStorage.getItem('data')!);
 
     });
-}
+  }
 
-edit(i) {
-  this.openModal(i);
+  edit(i) {
+    this.openModal(i);
 
-}
+  }
 
 }

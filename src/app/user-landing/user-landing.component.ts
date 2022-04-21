@@ -16,7 +16,7 @@ export class UserLandingComponent implements OnInit {
   }
 
   openPage() {
-    this._router.navigate(['user/landing']);
+    this._router.navigate(['landing']);
   }
 
 }
